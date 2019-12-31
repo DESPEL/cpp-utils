@@ -23,7 +23,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Console.h">
+    <ClInclude Include="ConsoleColors.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
