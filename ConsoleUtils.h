@@ -4,10 +4,12 @@
 #include <string>
 #include <type_traits>
 
+#include <cstdio>
+
 enum class TextProperty
 {
 	Reset = 0,
-	Undeline = 4,
+	Underline = 4,
 	UndelineOff = 24
 };
 
@@ -65,6 +67,13 @@ std::ostream& operator << (std::ostream& out, const BackgroundColor<Color> Tcolo
 std::ostream& operator << (std::ostream& out, const BackgroundColor<decltype(Color::Black)>& Tcolor) {
 	const std::string colorID = std::to_string(static_cast<int>(Tcolor.color));
 	std::cout << "\033[4" << colorID << "m";
+	return out;
+}
+
+struct {} cls;
+
+std::ostream& operator <<( std::ostream& out, const decltype(cls)) {
+	std::system("cls");
 	return out;
 }
 
