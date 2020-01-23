@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include <type_traits>
+#include <windows.h>
 
 #include <cstdio>
 
@@ -21,7 +22,7 @@ std::ostream& operator << (std::ostream& out, TextProperty prop) {
 
 struct Color {
 	enum {
-		Black, Red, Green, Yellow, Blue, Magenta, Cyan, White, Reset
+		Black, Blue, Green, LightBlue, Red, Purple, Gold, Silver, Gray, WeirdBlue, LightGreen, Cyan, Salmon, Magenta, Yellow, White
 	};
 	unsigned short int r, g, b;
 };
@@ -43,8 +44,9 @@ std::ostream& operator << (std::ostream& out, const TextColor<Color> Tcolor) {
 }
 
 std::ostream& operator << (std::ostream& out, const TextColor<decltype(Color::Black)>& Tcolor) {
-	const std::string colorID = std::to_string(static_cast<int>(Tcolor.color));
-	std::cout << "\033[3" << colorID << "m";
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleTextAttribute(hConsole, static_cast<int>(Tcolor.color));
+
 	return out;
 }
 
